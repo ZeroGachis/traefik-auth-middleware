@@ -1,4 +1,4 @@
-package cerbere
+package traefik_auth_middleware
 
 import (
 	"context"

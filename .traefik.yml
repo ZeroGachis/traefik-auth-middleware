@@ -1,7 +1,7 @@
 displayName: Keycloak Gatekeeper
 type: middleware
 
-import: cerbere
+import: github.com/ZeroGachis/traefik-auth-middleware
 
 summary: 'Make a Client Credentials OIDC request to a IAM server, and authentify request'
 

@@ -1,4 +1,4 @@
-package cerbere
+package traefik_auth_middleware
 
 import (
 	"context"
@@ -39,8 +39,8 @@ type KeycloakResponse struct {
 }
 
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
-	if len(config.IAM) != 5 {
-		return nil, fmt.Errorf("IAM Configuration must be defined!")
+	if len(config.IAM) != 4 {
+		return nil, fmt.Errorf("IAM Configuration must be defined")
 	}
 
 	return &Cerbere{

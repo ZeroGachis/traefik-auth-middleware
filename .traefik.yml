@@ -1,0 +1,13 @@
+displayName: Keycloak Gatekeeper
+type: middleware
+
+import: cerbere
+
+summary: 'Make a Client Credentials OIDC request to a IAM server, and authentify request'
+
+testData:
+  IAM:
+    Url: https://hades.guard/auth/token
+    ClientId: GRRRRR
+    UserQueryParamName: Username
+    PasswordQueryParamName: Password

@@ -71,23 +71,29 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 			"password":   {apikey[0]},
 		})
 
-	if err == nil {
-		if authResponse.StatusCode != http.StatusOK {
-			http.Error(rw, "Forbidden", http.StatusUnauthorized)
-			return
-		}
-		body, err := ioutil.ReadAll(authResponse.Body)
-		if err == nil {
-			var result KeycloakResponse
-			err := json.Unmarshal(body, &result)
-			if err == nil {
-				req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", result.AccessToken))
-				cerbereConfig.next.ServeHTTP(rw, req)
-			} else {
-				http.Error(rw, err.Error(), http.StatusInternalServerError)
-			}
-			return
-		}
+	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
+		return
 	}
+
+	if authResponse.StatusCode != http.StatusOK {
+		http.Error(rw, "Forbidden", http.StatusUnauthorized)
+		return
+	}
+
+	body, err := ioutil.ReadAll(authResponse.Body)
+	if err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var result KeycloakResponse
+	err := json.Unmarshal(body, &result)
+	if err != nil {
+		http.Error(rw, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", result.AccessToken))
+	cerbereConfig.next.ServeHTTP(rw, req)
 }

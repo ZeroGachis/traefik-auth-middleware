@@ -88,7 +88,7 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 	}
 
 	var result KeycloakResponse
-	err := json.Unmarshal(body, &result)
+	err = json.Unmarshal(body, &result)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return

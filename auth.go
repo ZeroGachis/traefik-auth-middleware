@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -81,7 +81,7 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 		return
 	}
 
-	body, err := ioutil.ReadAll(authResponse.Body)
+	body, err := io.ReadAll(authResponse.Body)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return

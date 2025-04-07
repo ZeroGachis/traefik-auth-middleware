@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: traefik-auth-middleware
+  description: Traefik Auth Middleware
+  annotations:
+    github.com/project-slug: ZeroGachis/traefik-auth-middleware
+  tags:
+    - traefik
+    - go-1-22
+spec:
+  type: library
+  lifecycle: production
+  system: platform
+  owner: DevOps
+  dependsOn:
+    - component:traefik

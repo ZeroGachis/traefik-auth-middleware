@@ -12,13 +12,13 @@ import (
 )
 
 type Config struct {
-	IAM map[string]string
-	httpClient             *http.Client
+	IAM        map[string]string
+	httpClient *http.Client
 }
 
 func CreateConfig() *Config {
 	return &Config{
-		IAM: make(map[string]string),
+		IAM:        make(map[string]string),
 		httpClient: http.DefaultClient,
 	}
 }
@@ -89,6 +89,7 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 	if authResponse.StatusCode != http.StatusOK {
 		cerbereConfig.logInfo(fmt.Sprintf("Fetching auth token failed: %d", authResponse.StatusCode))
 		http.Error(rw, "Forbidden", authResponse.StatusCode)
+
 		return
 	}
 	body, err := io.ReadAll(authResponse.Body)

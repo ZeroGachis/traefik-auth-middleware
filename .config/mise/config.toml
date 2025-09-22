@@ -1,0 +1,23 @@
+[tools]
+go = "1.23"
+golangci-lint = "v2.1.2"
+
+
+[tasks.install_yaegi]
+description = "Install YAEGI"
+run = "go install github.com/traefik/yaegi/cmd/yaegi@latest"
+
+[tasks.test]
+description = "Run tests"
+run = [
+    "go test -v -cover ./...",
+    "yaegi test -v ."
+]
+
+[tasks.format]
+description = "Format code"
+run = "go fmt"
+
+[tasks.lint]
+description = "Lint code"
+run = "golangci-lint run"

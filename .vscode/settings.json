@@ -1,0 +1,10 @@
+{
+    "gopls": {
+        "ui.semanticTokens": true,
+        "formatting.gofumpt": true
+    },
+    "go.lintTool": "golangci-lint",
+    "[go]": {
+        "editor.formatOnSave": true
+    }
+}

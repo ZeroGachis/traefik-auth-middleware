@@ -1,0 +1,36 @@
+name: Pull Request
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+
+  main:
+    name: Main Process
+    runs-on: ubuntu-latest
+    env:
+      CGO_ENABLED: 0
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/go/src/github.com/${{ github.repository }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          path: go/src/github.com/${{ github.repository }}
+          fetch-depth: 0
+      - uses: jdx/mise-action@v2
+      - name: Check dependencies
+        run: go mod tidy
+      - name: Install Yaegi
+        run: mise run install_yaegi
+
+      - name: Lint and Tests
+        run: |
+          mise run format
+          mise run lint
+          mise run test

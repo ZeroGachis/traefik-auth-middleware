@@ -5,6 +5,8 @@ import: github.com/ZeroGachis/traefik-auth-middleware
 
 summary: 'Make a Client Credentials OIDC request to a IAM server, and authentify request'
 
+iconPath: assets/icon.png
+
 testData:
   IAM:
     Url: https://hades.guard/auth/token

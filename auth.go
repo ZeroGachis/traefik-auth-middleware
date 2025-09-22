@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 )
@@ -59,6 +60,7 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 	apikey, apikeyPresent := query[cerbereConfig.passwordQueryParamName]
 
 	if !usernamePresent || !apikeyPresent {
+		log.Println("MalformedQuery")
 		http.Error(rw, "MalformedQuery", http.StatusBadRequest)
 		return
 	}
@@ -72,6 +74,7 @@ func (cerbereConfig *Cerbere) ServeHTTP(rw http.ResponseWriter, req *http.Reques
 		})
 
 	if err != nil {
+		log.Println("Error fetching auth token:", err)
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 		return
 	}

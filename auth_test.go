@@ -108,7 +108,6 @@ func TestFailWithIamReturnUnauthorized(t *testing.T) {
 
 	handler.ServeHTTP(recorder, req)
 	response := recorder.Result()
-	
 	if response.StatusCode != http.StatusUnauthorized {
 		t.Errorf("Expected status code 401, got %d", recorder.Code)
 	}

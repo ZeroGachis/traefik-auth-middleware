@@ -1,0 +1,23 @@
+name: Security scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 0" # At 06AM on Sunday.
+
+permissions:
+  actions: read
+  checks: write
+  contents: read
+  id-token: write
+  packages: read
+  pull-requests: write
+  security-events: write
+
+jobs:
+  security_scan:
+    uses: ZeroGachis/.github/.github/workflows/security-scan.yml@v7
+    secrets: inherit
+    with:
+      scan-image: false
+      scan-iac: false

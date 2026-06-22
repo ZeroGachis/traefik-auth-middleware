@@ -23,7 +23,7 @@ jobs:
         with:
           path: go/src/github.com/${{ github.repository }}
           fetch-depth: 0
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v3
       - name: Check dependencies
         run: go mod tidy
       - name: Install Yaegi
